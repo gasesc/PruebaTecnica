@@ -1,5 +1,6 @@
 package com.pruebaTenica.service;
 
+import com.pruebaTenica.dto.ProductoDTO;
 import com.pruebaTenica.model.Producto;
 
 import java.util.List;
@@ -7,15 +8,15 @@ import java.util.List;
 public interface IProductoService {
 
     // CREATE
-    Producto crearProducto(Producto producto);
+    ProductoDTO crearProducto(ProductoDTO producto);
 
     // READ
-    List<Producto> traerProductos();
+    List<ProductoDTO> traerProductos();
 
-    Producto traerProductoPorId(Long id);
+    ProductoDTO traerProductoPorId(Long id);
 
     // UPDATE
-    Producto actualizarProducto(Long id, Producto producto);
+    ProductoDTO actualizarProducto(Long id, ProductoDTO producto);
 
     // DELETE
     void eliminarProducto(Long id);
