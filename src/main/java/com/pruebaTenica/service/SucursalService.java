@@ -1,8 +1,10 @@
 package com.pruebaTenica.service;
 
 import com.pruebaTenica.dto.SucursalDTO;
+import com.pruebaTenica.exception.ProductoNoEncontradoException;
 import com.pruebaTenica.mapper.Mapper;
 import com.pruebaTenica.mapper.SucursalNoEncontradaException;
+import com.pruebaTenica.model.Producto;
 import com.pruebaTenica.model.Sucursal;
 import com.pruebaTenica.repository.SucuarsalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,8 @@ public class SucursalService implements ISucursalService{
 
     @Override
     public List<SucursalDTO> traerSucursales() {
-        return List.of();
+
+        return  servicio.findAll().stream().map(Mapper::toDTO).toList();
     }
 
     @Override

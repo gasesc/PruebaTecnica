@@ -23,6 +23,6 @@ public class Venta {
     @ManyToOne
     private Sucursal sucursal;
     private Double total;
-    @OneToMany(mappedBy = "venta")
+    @OneToMany(mappedBy = "venta",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleVenta>detalle=new ArrayList<>();
 }
