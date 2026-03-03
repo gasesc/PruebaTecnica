@@ -1,21 +1,21 @@
 package com.pruebaTenica.service;
 
+import com.pruebaTenica.dto.VentaDTO;
 import com.pruebaTenica.model.Venta;
 
 import java.util.List;
 
 public interface IVentaService {
 
-    Venta crearVenta(Venta venta);
+    VentaDTO crearVenta(VentaDTO ventaDTO);
 
-    // READ
-    List<Venta> traerVentas();
 
-    Venta traerVentaPorId(Long id);
+    List<VentaDTO> traerVentas();
 
-    // UPDATE
-    Venta actualizarVenta(Long id, Venta venta);
+    VentaDTO traerVentaPorId(Long id);
 
-    // DELETE
+
+    VentaDTO actualizarVenta(Long id, VentaDTO ventaDTO);
+
     void eliminarVenta(Long id);
 }

@@ -5,11 +5,11 @@ import com.pruebaTenica.exception.ProductoNoEncontradoException;
 import com.pruebaTenica.mapper.Mapper;
 import com.pruebaTenica.model.Producto;
 import com.pruebaTenica.repository.ProductoRepository;
-import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ProductoService implements IProductoService{
 
     @Autowired
@@ -18,7 +18,6 @@ public class ProductoService implements IProductoService{
     @Override
     public ProductoDTO crearProducto(ProductoDTO producto) {
 
-
         Producto produ = Producto.builder()
                 .nombre(producto.getNombre())
                 .categoria(producto.getCategoria())
@@ -26,12 +25,9 @@ public class ProductoService implements IProductoService{
                 .cantidad(producto.getCantidad())
                 .build();
 
-
-
         repo.save(produ);
 
         return Mapper.toDTO(produ);
-
     }
 
     @Override
@@ -50,11 +46,26 @@ public class ProductoService implements IProductoService{
 
     @Override
     public ProductoDTO actualizarProducto(Long id, ProductoDTO producto) {
-        return null;
+        Producto produ =repo.findById(id).orElseThrow(() -> new ProductoNoEncontradoException(id));
+        
+        produ.setNombre(producto.getNombre());
+        produ.setCantidad(producto.getCantidad());
+        produ.setPrecio(producto.getPrecio());
+        produ.setCategoria(producto.getCategoria());
+
+        repo.save(produ);
+
+
+        return Mapper.toDTO(produ);
     }
 
     @Override
     public void eliminarProducto(Long id) {
-        repo.deleteById(id);
+        if(!repo.existsById(id)){
+            throw  new ProductoNoEncontradoException(id);
+        }
+            repo.deleteById(id);
+
+
     }
 }
